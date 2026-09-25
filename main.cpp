@@ -12,7 +12,7 @@ struct studentas{
     int exam;
 };
 
-void printas(studentas A);
+void printas(studentas &A);
 
 int main()
 {
