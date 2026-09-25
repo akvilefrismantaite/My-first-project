@@ -13,7 +13,8 @@ struct studentas{
 };
 
 void printas(studentas &A);
-
+double vidurkis(studentas A);
+double galutinisVid(studentas A);
 int main()
 {
     int k;
@@ -43,12 +44,36 @@ int main()
         A.paz.clear();
     }
 
-    std::cout<<"Studento duom.: \n";
+    std::cout << "Studento duom.: \n";
 
-    for (studentas &B:grupe) printas(B);
+std::cout << std::left
+          << std::setw(15) << "Pavarde"
+          << std::setw(15) << "Vardas"
+          << std::setw(20) << "Galutinis (Vid.)"
+          << "\n";
+
+std::cout << "--------------------------------------------------\n";
+
+for (studentas &B : grupe)
+{
+    printas(B);
 }
-void printas(studentas &A){
-    std::cout<<"|"<<std::left<<std::setw(10)<<A.vardas<<"|"<<std::left<<std::setw(10)<<A.pavarde<<"|";
-    for (int p: A.paz) std::cout<<std::right<<std::setw(3)<<p<<"|";
-    std::cout<<std::right<<std::setw(5)<<A.exam<<"|\n";
+    return 0;
+}
+void printas(studentas &A)
+{
+    std::cout << std::left<< std::setw(15) << A.pavarde<< std::setw(15) << A.vardas<< std::fixed<< std::setprecision(2)<< galutinisVid(A)<< "\n";
+}
+double vidurkis(studentas A)
+{
+    double suma = 0;
+    for (int p : A.paz)
+    {
+        suma += p;
+    }
+    return suma / A.paz.size();
+}
+double galutinisVid(studentas A)
+{
+    return 0.4 * vidurkis(A) + 0.6 * A.exam;
 }
