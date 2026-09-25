@@ -15,6 +15,9 @@ struct studentas{
 void printas(studentas &A);
 double vidurkis(studentas A);
 double galutinisVid(studentas A);
+double mediana(studentas A);
+double galutinisMed(studentas A);
+void rikiuotiPazymius(vector<int> &paz);
 int main()
 {
     int k;
@@ -46,11 +49,7 @@ int main()
 
     std::cout << "Studento duom.: \n";
 
-std::cout << std::left
-          << std::setw(15) << "Pavarde"
-          << std::setw(15) << "Vardas"
-          << std::setw(20) << "Galutinis (Vid.)"
-          << "\n";
+std::cout << std::left<< std::setw(15) << "Pavarde"<< std::setw(15) << "Vardas"<< std::setw(20) << "Galutinis (Vid.)"<< std::setw(20) << "Galutinis (Med.)"<< "\n";
 
 std::cout << "--------------------------------------------------\n";
 
@@ -62,7 +61,7 @@ for (studentas &B : grupe)
 }
 void printas(studentas &A)
 {
-    std::cout << std::left<< std::setw(15) << A.pavarde<< std::setw(15) << A.vardas<< std::fixed<< std::setprecision(2)<< galutinisVid(A)<< "\n";
+     std::cout << std::left<< std::setw(15) << A.pavarde<< std::setw(15) << A.vardas<< std::fixed<< std::setprecision(2)<< std::setw(20) << galutinisVid(A)<< std::setw(20) << galutinisMed(A)<< "\n";
 }
 double vidurkis(studentas A)
 {
@@ -76,4 +75,42 @@ double vidurkis(studentas A)
 double galutinisVid(studentas A)
 {
     return 0.4 * vidurkis(A) + 0.6 * A.exam;
+}
+void rikiuotiPazymius(vector<int> &paz)
+{
+    int laikinas;
+
+    for (int i = 0; i < paz.size(); i++)
+    {
+        for (int j = 0; j < paz.size() - 1; j++)
+        {
+            if (paz[j] > paz[j + 1])
+            {
+                laikinas = paz[j];
+                paz[j] = paz[j + 1];
+                paz[j + 1] = laikinas;
+            }
+        }
+    }
+}
+
+double mediana(studentas A)
+{
+    vector<int> temp = A.paz;
+
+    rikiuotiPazymius(temp);
+
+    int n = temp.size();
+
+    if (n % 2 == 1)
+    {
+        return temp[n / 2];
+    }
+
+    return (temp[n / 2 - 1] + temp[n / 2]) / 2.0;
+}
+
+double galutinisMed(studentas A)
+{
+    return 0.4 * mediana(A) + 0.6 * A.exam;
 }
