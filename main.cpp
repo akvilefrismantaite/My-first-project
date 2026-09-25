@@ -60,7 +60,7 @@ int main()
 
     std::cout << "Studento duom.: \n";
 
-std::cout << std::left<< std::setw(15) << "Pavarde"<< std::setw(15) << "Vardas"<< std::setw(20) << "Galutinis (Vid.)"<< std::setw(20) << "Galutinis (Med.)"<< "\n";
+std::cout<< std::left<< std::setw(15)<< "Pavarde"<< std::setw(15)<< "Vardas"<< std::setw(20)<< "Galutinis (Vid.)"<< std::setw(20)<< "Galutinis (Med.)"<< "\n";
 
 std::cout << "--------------------------------------------------\n";
 
