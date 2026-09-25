@@ -37,10 +37,21 @@ int main()
             std::cout<<"Iveskite "<<i+1 <<"paz.: ";
             int a;
             std::cin>>a;
+            while (std::cin.fail() || a < 1 || a > 10){
+                std::cin.clear();
+                std::cin.ignore(1000, '\n');
+                std::cout << "Iveskite pazymi nuo 1 iki 10: ";
+                std::cin >> a;}
+
             A.paz.push_back(a);
         }
         std::cout<<"Iveskite semestro Egzamino paz.: ";
         std::cin>>A.exam;
+        while (std::cin.fail() || A.exam < 1 || A.exam > 10){
+            std::cin.clear();
+            std::cin.ignore(1000, '\n');
+            std::cout << "Iveskite egzamino pazymi nuo 1 iki 10: ";
+            std::cin >> A.exam;}
         grupe.push_back(A);
         A.pavarde.clear();
         A.vardas.clear();
@@ -65,6 +76,10 @@ void printas(studentas &A)
 }
 double vidurkis(studentas A)
 {
+    if (A.paz.size() == 0)
+{
+    return 0;
+}
     double suma = 0;
     for (int p : A.paz)
     {
@@ -96,6 +111,10 @@ void rikiuotiPazymius(vector<int> &paz)
 
 double mediana(studentas A)
 {
+    if (A.paz.size() == 0)
+{
+    return 0;
+}
     vector<int> temp = A.paz;
 
     rikiuotiPazymius(temp);
